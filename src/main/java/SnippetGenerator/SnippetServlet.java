@@ -23,34 +23,42 @@ import java.util.Map;
 
 @MultipartConfig
 public class SnippetServlet extends HttpServlet {
-    HashMap<URL, String> dummyData=new HashMap<URL, String>();
+    HashMap<String, HashMap<String, String>> dummyData = new HashMap<String, HashMap<String, String>>();
     ObjectMapper mapper = new ObjectMapper();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/event-stream");
         response.setCharacterEncoding("UTF-8");
         //Stack<Object> recentUpdates=helper.getUpdates();
         //int size=recentUpdates.size();
 
 
-
         PrintWriter writer = response.getWriter();
-        String query= request.getParameter("msg1");
+        String query = request.getParameter("msg1");
 
-        System.out.println("hi");
-        data dummy=new data(query);
-        dummyData= dummy.getMap();
+        data dummy = new data(query);
+        dummyData = dummy.getMap();
 
-        Iterator iterator=dummyData.entrySet().iterator();
+        Iterator iterator = dummyData.entrySet().iterator();
 
-        while(iterator.hasNext()){
-            Map.Entry pairs = (Map.Entry)iterator.next();
-            writer.println("<div class='row-fluid post-river-twocolumn border-bottom id-5294f1e5ecad046801c97170 featurepost'>" +
-                    "<a href='"+pairs.getKey()+"' target='_blank'>"+pairs.getKey()+"</a>" +
-                    "<br/>"+pairs.getValue()+"</div>"
-            );
-            writer.flush();
+        while (iterator.hasNext()) {
+            Map.Entry pairs = (Map.Entry) iterator.next();
+            Map<String, String> innerMap = new HashMap<String, String>();
+            innerMap = (Map)pairs.getValue();
+            Iterator iterator1 = innerMap.entrySet().iterator();
+
+            while (iterator1.hasNext()) {
+                Map.Entry innerPairs = (Map.Entry) iterator1.next();
+
+                writer.println("<div class='row-fluid post-river-twocolumn border-bottom id-5294f1e5ecad046801c97170 featurepost'>" +
+                                "<a href='" + pairs.getKey() + "' target='_blank'>" + innerPairs.getKey() + "</a>" +
+                                "<br/>" + innerPairs.getValue() + "</div>"
+                );
+                writer.flush();
+            }
+
         }
 
         writer.close();
@@ -63,4 +71,11 @@ public class SnippetServlet extends HttpServlet {
         System.out.println("posting");
     }
 
-    }
+}
+
+
+
+
+
+
+
