@@ -5,7 +5,7 @@
 </head>
 <body>
     <input type="text" name="msg1" id="msg1"/>
-    <button id="Submit" onClick="push()">Start</button>
+    <button id="Submit" onClick="push()">Search</button>
         <br/>
         <div  id="recentPosts"></div>
 
@@ -26,7 +26,7 @@
                 }
               }
                          request.open("GET",
-                          "http://localhost:8080/SnippetServlet?msg1=".concat(x) ,
+                          "http://localhost:8080/SnippetGenerator/SnippetServlet?msg1=".concat(x) ,
                           true);
 
             request.send(x);

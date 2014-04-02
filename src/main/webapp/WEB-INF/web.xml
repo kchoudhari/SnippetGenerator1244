@@ -13,10 +13,19 @@
         <servlet-class>SnippetGenerator.SnippetServlet</servlet-class>
 
     </servlet>
+    <servlet>
+        <display-name>GoogleSearchServlet</display-name>
+        <servlet-name>GoogleSearchServlet</servlet-name>
+        <servlet-class>SnippetGenerator.GoogleSearchServlet</servlet-class>
+
+    </servlet>
 
     <servlet-mapping>
-
         <servlet-name>SnippetServlet</servlet-name>
         <url-pattern>/SnippetServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoogleSearchServlet</servlet-name>
+        <url-pattern>/GoogleSearchServlet</url-pattern>
     </servlet-mapping>
 </web-app>
