@@ -53,6 +53,21 @@
             <artifactId>mongo-java-driver</artifactId>
             <version>2.10.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client-servlet</artifactId>
+            <version>1.17.0-rc</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-customsearch</artifactId>
+            <version>v1-rev36-1.17.0-rc</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson</artifactId>
+            <version>1.15.0-rc</version>
+        </dependency>
     </dependencies>
   <build>
       <plugins>
@@ -63,19 +78,15 @@
           </plugin>
           <plugin>
               <groupId>org.mortbay.jetty</groupId>
-              <artifactId>jetty-maven-plugin</artifactId>
-              <version>8.1.8.v20121106</version>
+              <artifactId>maven-jetty-plugin</artifactId>
+              <version>6.1.2</version>
               <configuration>
-
                   <connectors>
-                      <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                          <!--<port>8085</port>-->
+                      <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                           <port>8080</port>
-                          <maxIdleTime>60000</maxIdleTime>
                       </connector>
                   </connectors>
-                  <stopKey>stop</stopKey>
-                  <stopPort>8089</stopPort>
+
               </configuration>
           </plugin>
       </plugins>
