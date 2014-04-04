@@ -10,6 +10,8 @@ import com.google.api.services.customsearch.model.Search;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,8 @@ import java.util.Map;
 public class data {
 
     HashMap<Object, HashMap<String, String>> data = new HashMap<Object, HashMap<String, String>>();
+
+    urlExtractor test=new urlExtractor();
 
     data(String query) {
 
@@ -65,10 +69,14 @@ public class data {
             // Loop through your result items and stream them to the client
             for (Result result : items) {
                 Map<String, String> innerMap = new HashMap<String, String>();
-                innerMap.put(result.getTitle(), result.getSnippet());
+                innerMap.put(result.getTitle(),result.getSnippet());
                 genData.put(result.getLink(), innerMap);
+                test.getContent(new URL(result.getLink()));
+
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         return genData;

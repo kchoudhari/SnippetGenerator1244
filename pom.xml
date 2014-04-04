@@ -68,6 +68,17 @@
             <artifactId>google-http-client-jackson</artifactId>
             <version>1.15.0-rc</version>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.gate</groupId>
+            <artifactId>gate-core</artifactId>
+            <version>7.1</version>
+        </dependency>
+
     </dependencies>
   <build>
       <plugins>
