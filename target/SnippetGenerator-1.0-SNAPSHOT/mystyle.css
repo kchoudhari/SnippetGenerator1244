@@ -1,0 +1,49 @@
+
+h1
+{
+color:orange;
+text-align:center;
+}
+p
+{
+font-family:"Times New Roman";
+font-size:20px;
+}
+div
+{
+ font-family:"Times New Roman";
+ font-size:20px;
+}
+.row-fluid:before, .row-fluid:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.row-fluid:after {
+    clear: both;
+}
+.row-fluid:before, .row-fluid:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.border-bottom {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+.row-fluid {
+    width: 100%;
+}
+
+.ui-dialog, .xignite-ticker a, .post .ticker a, p.source, p.source span, .onepage-link {
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+body {
+    background-color:#d0e4fe;
+    color: rgb(51, 51, 51);
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+}

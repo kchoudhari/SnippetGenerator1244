@@ -6,6 +6,8 @@ package SnippetGenerator; /**
  * To change this template use File | Settings | File Templates.
  */
 
+import de.tudarmstadt.ukp.jwktl.JWKTL;
+import de.tudarmstadt.ukp.jwktl.api.*;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -13,12 +15,9 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 
 @MultipartConfig
@@ -36,8 +35,37 @@ public class SnippetServlet extends HttpServlet {
 
 
         PrintWriter writer = response.getWriter();
+        //get input string for search
         String query = request.getParameter("msg1");
+        //tokenize the input string
+        StringTokenizer tokens = new StringTokenizer(query);
+        //load stopwords
+        Set<String> stopWords = new LinkedHashSet<String>();
+        BufferedReader SW= new BufferedReader(new FileReader("C:\\Data\\wiktionary\\stopwords.txt"));
+        for(String line;(line = SW.readLine()) != null;)
+            stopWords.add(line.trim());
+        SW.close();
+        //remove stopwords from the token list
+        String updatedQuery = new String();
+        while(tokens.hasMoreTokens()){
+            String temp = tokens.nextToken();
+            if(!stopWords.contains(temp))
+            {
+                updatedQuery=updatedQuery.concat(temp);
+            }
+        }
+        StringTokenizer updatedTokens = new StringTokenizer(updatedQuery);
 
+        File WIKTIONARY_DIRECTORY = new File("C:\\Data\\wiktionary\\parsed");
+        IWiktionaryEdition wkt = JWKTL.openEdition(WIKTIONARY_DIRECTORY);
+        while(updatedTokens.hasMoreTokens()) {
+            IWiktionaryPage page = wkt.getPageForWord("tokens");
+            IWiktionaryEntry entry = page.getEntry(0);
+            IWiktionarySense sense = entry.getSense(1);
+            for (IWiktionaryRelation relation : sense.getRelations(RelationType.SYNONYM))
+                System.out.println(relation.getTarget());
+            wkt.close();
+        }
         data dummy = new data(query);
         dummyData = dummy.getMap();
 
