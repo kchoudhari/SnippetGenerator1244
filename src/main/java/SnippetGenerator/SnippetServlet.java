@@ -38,6 +38,7 @@ public class SnippetServlet extends HttpServlet {
         //get input string for search
         String query = request.getParameter("msg1");
         //tokenize the input string
+
         StringTokenizer tokens = new StringTokenizer(query);
         //load stopwords
         Set<String> stopWords = new LinkedHashSet<String>();
@@ -92,7 +93,6 @@ public class SnippetServlet extends HttpServlet {
         writer.close();
 
     }
-
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
